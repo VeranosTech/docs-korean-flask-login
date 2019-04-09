@@ -1,0 +1,726 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2011, Matthew Frazier
+# This file is distributed under the same license as the Flask-Login package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Flask-Login 0.4.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-09 11:47+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../index.rst:3
+msgid "Flask-Login"
+msgstr ""
+
+#: ../../index.rst:6
+msgid "Flask-Login provides user session management for Flask. It handles the common tasks of logging in, logging out, and remembering your users' sessions over extended periods of time."
+msgstr ""
+
+#: ../../index.rst:10
+msgid "It will:"
+msgstr ""
+
+#: ../../index.rst:12
+msgid "Store the active user's ID in the session, and let you log them in and out easily."
+msgstr ""
+
+#: ../../index.rst:14
+msgid "Let you restrict views to logged-in (or logged-out) users."
+msgstr ""
+
+#: ../../index.rst:15
+msgid "Handle the normally-tricky \"remember me\" functionality."
+msgstr ""
+
+#: ../../index.rst:16
+msgid "Help protect your users' sessions from being stolen by cookie thieves."
+msgstr ""
+
+#: ../../index.rst:17
+msgid "Possibly integrate with Flask-Principal or other authorization extensions later on."
+msgstr ""
+
+#: ../../index.rst:20
+msgid "However, it does not:"
+msgstr ""
+
+#: ../../index.rst:22
+msgid "Impose a particular database or other storage method on you. You are entirely in charge of how the user is loaded."
+msgstr ""
+
+#: ../../index.rst:24
+msgid "Restrict you to using usernames and passwords, OpenIDs, or any other method of authenticating."
+msgstr ""
+
+#: ../../index.rst:26
+msgid "Handle permissions beyond \"logged in or not.\""
+msgstr ""
+
+#: ../../index.rst:27
+msgid "Handle user registration or account recovery."
+msgstr ""
+
+#: ../../index.rst:35
+msgid "Installation"
+msgstr ""
+
+#: ../../index.rst:36
+msgid "Install the extension with pip::"
+msgstr ""
+
+#: ../../index.rst:42
+msgid "Configuring your Application"
+msgstr ""
+
+#: ../../index.rst:43
+msgid "The most important part of an application that uses Flask-Login is the `LoginManager` class. You should create one for your application somewhere in your code, like this::"
+msgstr ""
+
+#: ../../index.rst:49
+msgid "The login manager contains the code that lets your application and Flask-Login work together, such as how to load a user from an ID, where to send users when they need to log in, and the like."
+msgstr ""
+
+#: ../../index.rst:53
+msgid "Once the actual application object has been created, you can configure it for login with::"
+msgstr ""
+
+#: ../../index.rst:59
+msgid "By default, Flask-Login uses sessions for authentication. This means you must set the secret key on your application, otherwise Flask will give you an error message telling you to do so. See the `Flask documentation on sessions`_ to see how to set a secret key."
+msgstr ""
+
+#: ../../index.rst:64
+msgid "*Warning:* Make SURE to use the given command in the \"How to generate good secret keys\" section to generate your own secret key. DO NOT use the example one."
+msgstr ""
+
+#: ../../index.rst:69
+msgid "How it Works"
+msgstr ""
+
+#: ../../index.rst:70
+msgid "You will need to provide a `~LoginManager.user_loader` callback. This callback is used to reload the user object from the user ID stored in the session. It should take the `unicode` ID of a user, and return the corresponding user object. For example::"
+msgstr ""
+
+#: ../../index.rst:79
+msgid "It should return `None` (**not raise an exception**) if the ID is not valid. (In that case, the ID will manually be removed from the session and processing will continue.)"
+msgstr ""
+
+#: ../../index.rst:84
+msgid "Your User Class"
+msgstr ""
+
+#: ../../index.rst:85
+msgid "The class that you use to represent users needs to implement these properties and methods:"
+msgstr ""
+
+#: ../../index.rst:91
+msgid "`is_authenticated`"
+msgstr ""
+
+#: ../../index.rst:89
+msgid "This property should return `True` if the user is authenticated, i.e. they have provided valid credentials. (Only authenticated users will fulfill the criteria of `login_required`.)"
+msgstr ""
+
+#: ../../index.rst:97
+msgid "`is_active`"
+msgstr ""
+
+#: ../../index.rst:94
+msgid "This property should return `True` if this is an active user - in addition to being authenticated, they also have activated their account, not been suspended, or any condition your application has for rejecting an account. Inactive accounts may not log in (without being forced of course)."
+msgstr ""
+
+#: ../../index.rst:101
+msgid "`is_anonymous`"
+msgstr ""
+
+#: ../../index.rst:100
+msgid "This property should return `True` if this is an anonymous user. (Actual users should return `False` instead.)"
+msgstr ""
+
+#: ../../index.rst:107
+msgid "`get_id()`"
+msgstr ""
+
+#: ../../index.rst:104
+msgid "This method must return a `unicode` that uniquely identifies this user, and can be used to load the user from the `~LoginManager.user_loader` callback. Note that this **must** be a `unicode` - if the ID is natively an `int` or some other type, you will need to convert it to `unicode`."
+msgstr ""
+
+#: ../../index.rst:109
+msgid "To make implementing a user class easier, you can inherit from `UserMixin`, which provides default implementations for all of these properties and methods. (It's not required, though.)"
+msgstr ""
+
+#: ../../index.rst:114
+msgid "Login Example"
+msgstr ""
+
+#: ../../index.rst:116
+msgid "Once a user has authenticated, you log them in with the `login_user` function."
+msgstr ""
+
+#: ../../index.rst:119
+msgid "For example:"
+msgstr ""
+
+#: ../../index.rst:145
+msgid "*Warning:* You MUST validate the value of the `next` parameter. If you do not, your application will be vulnerable to open redirects. For an example implementation of `is_safe_url` see `this Flask Snippet`_."
+msgstr ""
+
+#: ../../index.rst:149
+msgid "It's that simple. You can then access the logged-in user with the `current_user` proxy, which is available in every template::"
+msgstr ""
+
+#: ../../index.rst:156
+msgid "Views that require your users to be logged in can be decorated with the `login_required` decorator::"
+msgstr ""
+
+#: ../../index.rst:164
+msgid "When the user is ready to log out::"
+msgstr ""
+
+#: ../../index.rst:172
+msgid "They will be logged out, and any cookies for their session will be cleaned up."
+msgstr ""
+
+#: ../../index.rst:177
+msgid "Customizing the Login Process"
+msgstr ""
+
+#: ../../index.rst:178
+msgid "By default, when a user attempts to access a `login_required` view without being logged in, Flask-Login will flash a message and redirect them to the log in view. (If the login view is not set, it will abort with a 401 error.)"
+msgstr ""
+
+#: ../../index.rst:182
+msgid "The name of the log in view can be set as `LoginManager.login_view`. For example::"
+msgstr ""
+
+#: ../../index.rst:187
+msgid "The default message flashed is ``Please log in to access this page.`` To customize the message, set `LoginManager.login_message`::"
+msgstr ""
+
+#: ../../index.rst:192
+msgid "To customize the message category, set `LoginManager.login_message_category`::"
+msgstr ""
+
+#: ../../index.rst:196
+msgid "When the log in view is redirected to, it will have a ``next`` variable in the query string, which is the page that the user was trying to access. Alternatively, if `USE_SESSION_FOR_NEXT` is `True`, the page is stored in the session under the key ``next``."
+msgstr ""
+
+#: ../../index.rst:201
+msgid "If you would like to customize the process further, decorate a function with `LoginManager.unauthorized_handler`::"
+msgstr ""
+
+#: ../../index.rst:211
+msgid "Login using Authorization header"
+msgstr ""
+
+#: ../../index.rst:214
+msgid "This method will be deprecated; use the `~LoginManager.request_loader` below instead."
+msgstr ""
+
+#: ../../index.rst:217
+msgid "Sometimes you want to support Basic Auth login using the `Authorization` header, such as for api requests. To support login via header you will need to provide a `~LoginManager.header_loader` callback. This callback should behave the same as your `~LoginManager.user_loader` callback, except that it accepts a header value instead of a user id. For example::"
+msgstr ""
+
+#: ../../index.rst:232
+msgid "By default the `Authorization` header's value is passed to your `~LoginManager.header_loader` callback. You can change the header used with the `AUTH_HEADER_NAME` configuration."
+msgstr ""
+
+#: ../../index.rst:238
+msgid "Custom Login using Request Loader"
+msgstr ""
+
+#: ../../index.rst:239
+msgid "Sometimes you want to login users without using cookies, such as using header values or an api key passed as a query argument. In these cases, you should use the `~LoginManager.request_loader` callback. This callback should behave the same as your `~LoginManager.user_loader` callback, except that it accepts the Flask request instead of a user_id."
+msgstr ""
+
+#: ../../index.rst:245
+msgid "For example, to support login from both a url argument and from Basic Auth using the `Authorization` header::"
+msgstr ""
+
+#: ../../index.rst:275
+msgid "Anonymous Users"
+msgstr ""
+
+#: ../../index.rst:276
+msgid "By default, when a user is not actually logged in, `current_user` is set to an `AnonymousUserMixin` object. It has the following properties and methods:"
+msgstr ""
+
+#: ../../index.rst:279
+msgid "`is_active` and `is_authenticated` are `False`"
+msgstr ""
+
+#: ../../index.rst:280
+msgid "`is_anonymous` is `True`"
+msgstr ""
+
+#: ../../index.rst:281
+msgid "`get_id()` returns `None`"
+msgstr ""
+
+#: ../../index.rst:283
+msgid "If you have custom requirements for anonymous users (for example, they need to have a permissions field), you can provide a callable (either a class or factory function) that creates anonymous users to the `LoginManager` with::"
+msgstr ""
+
+#: ../../index.rst:291
+msgid "Remember Me"
+msgstr ""
+
+#: ../../index.rst:292
+msgid "By default, when the user closes their browser the Flask Session is deleted and the user is logged out. \"Remember Me\" prevents the user from accidentally being logged out when they close their browser. This does **NOT** mean remembering or pre-filling the user's username or password in a login form after the user has logged out."
+msgstr ""
+
+#: ../../index.rst:298
+msgid "\"Remember Me\" functionality can be tricky to implement. However, Flask-Login makes it nearly transparent - just pass ``remember=True`` to the `login_user` call. A cookie will be saved on the user's computer, and then Flask-Login will automatically restore the user ID from that cookie if it is not in the session. The amount of time before the cookie expires can be set with the `REMEMBER_COOKIE_DURATION` configuration or it can be passed to `login_user`. The cookie is tamper-proof, so if the user tampers with it (i.e. inserts someone else's user ID in place of their own), the cookie will merely be rejected, as if it was not there."
+msgstr ""
+
+#: ../../index.rst:308
+msgid "That level of functionality is handled automatically. However, you can (and should, if your application handles any kind of sensitive data) provide additional infrastructure to increase the security of your remember cookies."
+msgstr ""
+
+#: ../../index.rst:314
+msgid "Alternative Tokens"
+msgstr ""
+
+#: ../../index.rst:315
+msgid "Using the user ID as the value of the remember token means you must change the user's ID to invalidate their login sessions. One way to improve this is to use an alternative user id instead of the user's ID. For example::"
+msgstr ""
+
+#: ../../index.rst:323
+msgid "Then the `~UserMixin.get_id` method of your User class would return the alternative id instead of the user's primary ID::"
+msgstr ""
+
+#: ../../index.rst:329
+msgid "This way you are free to change the user's alternative id to a new randomly generated value when the user changes their password, which would ensure their old authentication sessions will cease to be valid. Note that the alternative id must still uniquely identify the user... think of it as a second user ID."
+msgstr ""
+
+#: ../../index.rst:336
+msgid "Fresh Logins"
+msgstr ""
+
+#: ../../index.rst:337
+msgid "When a user logs in, their session is marked as \"fresh,\" which indicates that they actually authenticated on that session. When their session is destroyed and they are logged back in with a \"remember me\" cookie, it is marked as \"non-fresh.\" `login_required` does not differentiate between freshness, which is fine for most pages. However, sensitive actions like changing one's personal information should require a fresh login. (Actions like changing one's password should always require a password re-entry regardless.)"
+msgstr ""
+
+#: ../../index.rst:345
+msgid "`fresh_login_required`, in addition to verifying that the user is logged in, will also ensure that their login is fresh. If not, it will send them to a page where they can re-enter their credentials. You can customize its behavior in the same ways as you can customize `login_required`, by setting `LoginManager.refresh_view`, `~LoginManager.needs_refresh_message`, and `~LoginManager.needs_refresh_message_category`::"
+msgstr ""
+
+#: ../../index.rst:358
+msgid "Or by providing your own callback to handle refreshing::"
+msgstr ""
+
+#: ../../index.rst:365
+msgid "To mark a session as fresh again, call the `confirm_login` function."
+msgstr ""
+
+#: ../../index.rst:369
+msgid "Cookie Settings"
+msgstr ""
+
+#: ../../index.rst:370
+msgid "The details of the cookie can be customized in the application settings."
+msgstr ""
+
+#: ../../index.rst:373
+msgid "`REMEMBER_COOKIE_NAME`"
+msgstr ""
+
+#: ../../index.rst:373
+msgid "The name of the cookie to store the \"remember me\" information in. **Default:** ``remember_token``"
+msgstr ""
+
+#: ../../index.rst:375
+msgid "`REMEMBER_COOKIE_DURATION`"
+msgstr ""
+
+#: ../../index.rst:375
+msgid "The amount of time before the cookie expires, as a `datetime.timedelta` object or integer seconds. **Default:** 365 days (1 non-leap Gregorian year)"
+msgstr ""
+
+#: ../../index.rst:378
+msgid "`REMEMBER_COOKIE_DOMAIN`"
+msgstr ""
+
+#: ../../index.rst:378
+msgid "If the \"Remember Me\" cookie should cross domains, set the domain value here (i.e. ``.example.com`` would allow the cookie to be used on all subdomains of ``example.com``). **Default:** `None`"
+msgstr ""
+
+#: ../../index.rst:383
+msgid "`REMEMBER_COOKIE_PATH`"
+msgstr ""
+
+#: ../../index.rst:383
+msgid "Limits the \"Remember Me\" cookie to a certain path. **Default:** ``/``"
+msgstr ""
+
+#: ../../index.rst:385
+msgid "`REMEMBER_COOKIE_SECURE`"
+msgstr ""
+
+#: ../../index.rst:385
+msgid "Restricts the \"Remember Me\" cookie's scope to secure channels (typically HTTPS). **Default:** `None`"
+msgstr ""
+
+#: ../../index.rst:388
+msgid "`REMEMBER_COOKIE_HTTPONLY`"
+msgstr ""
+
+#: ../../index.rst:388
+msgid "Prevents the \"Remember Me\" cookie from being accessed by client-side scripts. **Default:** `False`"
+msgstr ""
+
+#: ../../index.rst:391
+msgid "`REMEMBER_COOKIE_REFRESH_EACH_REQUEST`"
+msgstr ""
+
+#: ../../index.rst:391
+msgid "If set to `True` the cookie is refreshed on every request, which bumps the lifetime. Works like Flask's `SESSION_REFRESH_EACH_REQUEST`. **Default:** `False`"
+msgstr ""
+
+#: ../../index.rst:399
+msgid "Session Protection"
+msgstr ""
+
+#: ../../index.rst:400
+msgid "While the features above help secure your \"Remember Me\" token from cookie thieves, the session cookie is still vulnerable. Flask-Login includes session protection to help prevent your users' sessions from being stolen."
+msgstr ""
+
+#: ../../index.rst:404
+msgid "You can configure session protection on the `LoginManager`, and in the app's configuration. If it is enabled, it can operate in either `basic` or `strong` mode. To set it on the `LoginManager`, set the `~LoginManager.session_protection` attribute to ``\"basic\"`` or ``\"strong\"``::"
+msgstr ""
+
+#: ../../index.rst:411
+msgid "Or, to disable it::"
+msgstr ""
+
+#: ../../index.rst:415
+msgid "By default, it is activated in ``\"basic\"`` mode. It can be disabled in the app's configuration by setting the `SESSION_PROTECTION` setting to `None`, ``\"basic\"``, or ``\"strong\"``."
+msgstr ""
+
+#: ../../index.rst:419
+msgid "When session protection is active, each request, it generates an identifier for the user's computer (basically, a secure hash of the IP address and user agent). If the session does not have an associated identifier, the one generated will be stored. If it has an identifier, and it matches the one generated, then the request is OK."
+msgstr ""
+
+#: ../../index.rst:425
+msgid "If the identifiers do not match in `basic` mode, or when the session is permanent, then the session will simply be marked as non-fresh, and anything requiring a fresh login will force the user to re-authenticate. (Of course, you must be already using fresh logins where appropriate for this to have an effect.)"
+msgstr ""
+
+#: ../../index.rst:431
+msgid "If the identifiers do not match in `strong` mode for a non-permanent session, then the entire session (as well as the remember token if it exists) is deleted."
+msgstr ""
+
+#: ../../index.rst:437
+msgid "Disabling Session Cookie for APIs"
+msgstr ""
+
+#: ../../index.rst:438
+msgid "When authenticating to APIs, you might want to disable setting the Flask Session cookie. To do this, use a custom session interface that skips saving the session depending on a flag you set on the request. For example::"
+msgstr ""
+
+#: ../../index.rst:460
+msgid "This prevents setting the Flask Session cookie whenever the user authenticated using your `~LoginManager.header_loader`."
+msgstr ""
+
+#: ../../index.rst:465
+msgid "Localization"
+msgstr ""
+
+#: ../../index.rst:466
+msgid "By default, the `LoginManager` uses ``flash`` to display messages when a user is required to log in. These messages are in English. If you require localization, set the `localize_callback` attribute of `LoginManager` to a function to be called with these messages before they're sent to ``flash``, e.g. ``gettext``. This function will be called with the message and its return value will be sent to ``flash`` instead."
+msgstr ""
+
+#: ../../index.rst:475
+msgid "API Documentation"
+msgstr ""
+
+#: ../../index.rst:476
+msgid "This documentation is automatically generated from Flask-Login's source code."
+msgstr ""
+
+#: ../../index.rst:480
+msgid "Configuring Login"
+msgstr ""
+
+#: ../../../flask_login/login_manager.py:docstring of flask_login.LoginManager:1
+msgid "This object is used to hold the settings used for logging in. Instances of :class:`LoginManager` are *not* bound to specific apps, so you can create one in the main body of your code and then bind it to your app in a factory function."
+msgstr ""
+
+#: ../../../flask_login/login_manager.py:docstring of flask_login.LoginManager.setup_app:1
+msgid "This method has been deprecated. Please use :meth:`LoginManager.init_app` instead."
+msgstr ""
+
+#: ../../../flask_login/login_manager.py:docstring of flask_login.LoginManager.unauthorized:1
+msgid "This is called when the user is required to log in. If you register a callback with :meth:`LoginManager.unauthorized_handler`, then it will be called. Otherwise, it will take the following actions:"
+msgstr ""
+
+#: ../../../flask_login/login_manager.py:docstring of flask_login.LoginManager.unauthorized:5
+msgid "Flash :attr:`LoginManager.login_message` to the user."
+msgstr ""
+
+#: ../../../flask_login/login_manager.py:docstring of flask_login.LoginManager.unauthorized:7
+msgid "If the app is using blueprints find the login view for the current blueprint using `blueprint_login_views`. If the app is not using blueprints or the login view for the current blueprint is not specified use the value of `login_view`."
+msgstr ""
+
+#: ../../../flask_login/login_manager.py:docstring of flask_login.LoginManager.unauthorized:12
+msgid "Redirect the user to the login view. (The page they were attempting to access will be passed in the ``next`` query string variable, so you can redirect there if present instead of the homepage. Alternatively, it will be added to the session as ``next`` if USE_SESSION_FOR_NEXT is set.)"
+msgstr ""
+
+#: ../../../flask_login/login_manager.py:docstring of flask_login.LoginManager.unauthorized:18
+msgid "If :attr:`LoginManager.login_view` is not defined, then it will simply raise a HTTP 401 (Unauthorized) error instead."
+msgstr ""
+
+#: ../../../flask_login/login_manager.py:docstring of flask_login.LoginManager.unauthorized:21
+#: ../../../flask_login/login_manager.py:docstring of flask_login.LoginManager.needs_refresh:16
+msgid "This should be returned from a view or before/after_request function, otherwise the redirect will have no effect."
+msgstr ""
+
+#: ../../../flask_login/login_manager.py:docstring of flask_login.LoginManager.needs_refresh:1
+msgid "This is called when the user is logged in, but they need to be reauthenticated because their session is stale. If you register a callback with `needs_refresh_handler`, then it will be called. Otherwise, it will take the following actions:"
+msgstr ""
+
+#: ../../../flask_login/login_manager.py:docstring of flask_login.LoginManager.needs_refresh:6
+msgid "Flash :attr:`LoginManager.needs_refresh_message` to the user."
+msgstr ""
+
+#: ../../../flask_login/login_manager.py:docstring of flask_login.LoginManager.needs_refresh:8
+msgid "Redirect the user to :attr:`LoginManager.refresh_view`. (The page they were attempting to access will be passed in the ``next`` query string variable, so you can redirect there if present instead of the homepage.)"
+msgstr ""
+
+#: ../../../flask_login/login_manager.py:docstring of flask_login.LoginManager.needs_refresh:13
+msgid "If :attr:`LoginManager.refresh_view` is not defined, then it will simply raise a HTTP 401 (Unauthorized) error instead."
+msgstr ""
+
+#: ../../index.rst:493
+msgid "General Configuration"
+msgstr ""
+
+#: ../../../flask_login/login_manager.py:docstring of flask_login.LoginManager.user_loader:1
+msgid "This sets the callback for reloading a user from the session. The function you set should take a user ID (a ``unicode``) and return a user object, or ``None`` if the user does not exist."
+msgstr ""
+
+#: ../../../flask_login/login_manager.py:docstring of flask_login.LoginManager.user_loader:0
+#: ../../../flask_login/login_manager.py:docstring of flask_login.LoginManager.header_loader:0
+#: ../../../flask_login/login_manager.py:docstring of flask_login.LoginManager.unauthorized_handler:0
+#: ../../../flask_login/login_manager.py:docstring of flask_login.LoginManager.needs_refresh_handler:0
+#: ../../../flask_login/utils.py:docstring of flask_login.login_user:0
+#: ../../../flask_login/utils.py:docstring of flask_login.login_required:0
+#: ../../../flask_login/utils.py:docstring of flask_login.fresh_login_required:0
+#: ../../../flask_login/utils.py:docstring of flask_login.login_url:0
+msgid "Parameters"
+msgstr ""
+
+#: ../../../flask_login/login_manager.py:docstring of flask_login.LoginManager.user_loader:5
+#: ../../../flask_login/login_manager.py:docstring of flask_login.LoginManager.header_loader:8
+msgid "The callback for retrieving a user object."
+msgstr ""
+
+#: ../../../flask_login/login_manager.py:docstring of flask_login.LoginManager.header_loader:1
+msgid "This function has been deprecated. Please use :meth:`LoginManager.request_loader` instead."
+msgstr ""
+
+#: ../../../flask_login/login_manager.py:docstring of flask_login.LoginManager.header_loader:4
+msgid "This sets the callback for loading a user from a header value. The function you set should take an authentication token and return a user object, or `None` if the user does not exist."
+msgstr ""
+
+#: ../../index.rst:500
+msgid "A class or factory function that produces an anonymous user, which is used when no one is logged in."
+msgstr ""
+
+#: ../../index.rst:504
+msgid "`unauthorized` Configuration"
+msgstr ""
+
+#: ../../index.rst:507
+msgid "The name of the view to redirect to when the user needs to log in. (This can be an absolute URL as well, if your authentication machinery is external to your application.)"
+msgstr ""
+
+#: ../../index.rst:513
+msgid "The message to flash when a user is redirected to the login page."
+msgstr ""
+
+#: ../../../flask_login/login_manager.py:docstring of flask_login.LoginManager.unauthorized_handler:1
+msgid "This will set the callback for the `unauthorized` method, which among other things is used by `login_required`. It takes no arguments, and should return a response to be sent to the user instead of their normal view."
+msgstr ""
+
+#: ../../../flask_login/login_manager.py:docstring of flask_login.LoginManager.unauthorized_handler:6
+#: ../../../flask_login/login_manager.py:docstring of flask_login.LoginManager.needs_refresh_handler:6
+msgid "The callback for unauthorized users."
+msgstr ""
+
+#: ../../index.rst:518
+msgid "`needs_refresh` Configuration"
+msgstr ""
+
+#: ../../index.rst:521
+msgid "The name of the view to redirect to when the user needs to reauthenticate."
+msgstr ""
+
+#: ../../index.rst:526
+msgid "The message to flash when a user is redirected to the reauthentication page."
+msgstr ""
+
+#: ../../../flask_login/login_manager.py:docstring of flask_login.LoginManager.needs_refresh_handler:1
+msgid "This will set the callback for the `needs_refresh` method, which among other things is used by `fresh_login_required`. It takes no arguments, and should return a response to be sent to the user instead of their normal view."
+msgstr ""
+
+#: ../../index.rst:533
+msgid "Login Mechanisms"
+msgstr ""
+
+#: ../../index.rst:536
+msgid "A proxy for the current user."
+msgstr ""
+
+#: ../../../flask_login/utils.py:docstring of flask_login.login_fresh:1
+msgid "This returns ``True`` if the current login is fresh."
+msgstr ""
+
+#: ../../../flask_login/utils.py:docstring of flask_login.login_user:1
+msgid "Logs a user in. You should pass the actual user object to this. If the user's `is_active` property is ``False``, they will not be logged in unless `force` is ``True``."
+msgstr ""
+
+#: ../../../flask_login/utils.py:docstring of flask_login.login_user:5
+msgid "This will return ``True`` if the log in attempt succeeds, and ``False`` if it fails (i.e. because the user is inactive)."
+msgstr ""
+
+#: ../../../flask_login/utils.py:docstring of flask_login.login_user:8
+msgid "The user object to log in."
+msgstr ""
+
+#: ../../../flask_login/utils.py:docstring of flask_login.login_user:10
+msgid "Whether to remember the user after their session expires. Defaults to ``False``."
+msgstr ""
+
+#: ../../../flask_login/utils.py:docstring of flask_login.login_user:13
+msgid "The amount of time before the remember cookie expires. If ``None`` the value set in the settings is used. Defaults to ``None``."
+msgstr ""
+
+#: ../../../flask_login/utils.py:docstring of flask_login.login_user:16
+msgid "If the user is inactive, setting this to ``True`` will log them in regardless. Defaults to ``False``."
+msgstr ""
+
+#: ../../../flask_login/utils.py:docstring of flask_login.login_user:19
+msgid "setting this to ``False`` will log in the user with a session marked as not \"fresh\". Defaults to ``True``."
+msgstr ""
+
+#: ../../../flask_login/utils.py:docstring of flask_login.logout_user:1
+msgid "Logs a user out. (You do not need to pass the actual user.) This will also clean up the remember me cookie if it exists."
+msgstr ""
+
+#: ../../../flask_login/utils.py:docstring of flask_login.confirm_login:1
+msgid "This sets the current session as fresh. Sessions become stale when they are reloaded from a cookie."
+msgstr ""
+
+#: ../../index.rst:548
+msgid "Protecting Views"
+msgstr ""
+
+#: ../../../flask_login/utils.py:docstring of flask_login.login_required:1
+msgid "If you decorate a view with this, it will ensure that the current user is logged in and authenticated before calling the actual view. (If they are not, it calls the :attr:`LoginManager.unauthorized` callback.) For example::"
+msgstr ""
+
+#: ../../../flask_login/utils.py:docstring of flask_login.login_required:11
+msgid "If there are only certain times you need to require that your user is logged in, you can do so with::"
+msgstr ""
+
+#: ../../../flask_login/utils.py:docstring of flask_login.login_required:17
+msgid "...which is essentially the code that this function adds to your views."
+msgstr ""
+
+#: ../../../flask_login/utils.py:docstring of flask_login.login_required:19
+msgid "It can be convenient to globally turn off authentication when unit testing. To enable this, if the application configuration variable `LOGIN_DISABLED` is set to `True`, this decorator will be ignored."
+msgstr ""
+
+#: ../../../flask_login/utils.py:docstring of flask_login.login_required:25
+#: ../../../flask_login/utils.py:docstring of flask_login.fresh_login_required:16
+msgid "Per `W3 guidelines for CORS preflight requests <http://www.w3.org/TR/cors/#cross-origin-request-with-preflight-0>`_, HTTP ``OPTIONS`` requests are exempt from login checks."
+msgstr ""
+
+#: ../../../flask_login/utils.py:docstring of flask_login.login_required:29
+#: ../../../flask_login/utils.py:docstring of flask_login.fresh_login_required:20
+msgid "The view function to decorate."
+msgstr ""
+
+#: ../../../flask_login/utils.py:docstring of flask_login.fresh_login_required:1
+msgid "If you decorate a view with this, it will ensure that the current user's login is fresh - i.e. their session was not restored from a 'remember me' cookie. Sensitive operations, like changing a password or e-mail, should be protected with this, to impede the efforts of cookie thieves."
+msgstr ""
+
+#: ../../../flask_login/utils.py:docstring of flask_login.fresh_login_required:6
+msgid "If the user is not authenticated, :meth:`LoginManager.unauthorized` is called as normal. If they are authenticated, but their session is not fresh, it will call :meth:`LoginManager.needs_refresh` instead. (In that case, you will need to provide a :attr:`LoginManager.refresh_view`.)"
+msgstr ""
+
+#: ../../../flask_login/utils.py:docstring of flask_login.fresh_login_required:11
+msgid "Behaves identically to the :func:`login_required` decorator with respect to configutation variables."
+msgstr ""
+
+#: ../../index.rst:555
+msgid "User Object Helpers"
+msgstr ""
+
+#: ../../../flask_login/mixins.py:docstring of flask_login.UserMixin:1
+msgid "This provides default implementations for the methods that Flask-Login expects user objects to have."
+msgstr ""
+
+#: ../../../flask_login/mixins.py:docstring of flask_login.AnonymousUserMixin:1
+msgid "This is the default object for representing an anonymous user."
+msgstr ""
+
+#: ../../index.rst:564
+msgid "Utilities"
+msgstr ""
+
+#: ../../../flask_login/utils.py:docstring of flask_login.login_url:1
+msgid "Creates a URL for redirecting to a login page. If only `login_view` is provided, this will just return the URL for it. If `next_url` is provided, however, this will append a ``next=URL`` parameter to the query string so that the login view can redirect back to that URL. Flask-Login's default unauthorized handler uses this function when redirecting to your login url. To force the host name used, set `FORCE_HOST_FOR_REDIRECTS` to a host. This prevents from redirecting to external sites if request headers Host or X-Forwarded-For are present."
+msgstr ""
+
+#: ../../../flask_login/utils.py:docstring of flask_login.login_url:10
+msgid "The name of the login view. (Alternately, the actual URL to the login view.)"
+msgstr ""
+
+#: ../../../flask_login/utils.py:docstring of flask_login.login_url:13
+msgid "The URL to give the login view for redirection."
+msgstr ""
+
+#: ../../../flask_login/utils.py:docstring of flask_login.login_url:15
+msgid "What field to store the next URL in. (It defaults to ``next``.)"
+msgstr ""
+
+#: ../../index.rst:569
+msgid "Signals"
+msgstr ""
+
+#: ../../index.rst:570
+msgid "See the `Flask documentation on signals`_ for information on how to use these signals in your code."
+msgstr ""
+
+#: ../../index.rst:575
+msgid "Sent when a user is logged in. In addition to the app (which is the sender), it is passed `user`, which is the user being logged in."
+msgstr ""
+
+#: ../../index.rst:580
+msgid "Sent when a user is logged out. In addition to the app (which is the sender), it is passed `user`, which is the user being logged out."
+msgstr ""
+
+#: ../../index.rst:585
+msgid "Sent when a user's login is confirmed, marking it as fresh. (It is not called for a normal login.) It receives no additional arguments besides the app."
+msgstr ""
+
+#: ../../index.rst:591
+msgid "Sent when the `unauthorized` method is called on a `LoginManager`. It receives no additional arguments besides the app."
+msgstr ""
+
+#: ../../index.rst:596
+msgid "Sent when the `needs_refresh` method is called on a `LoginManager`. It receives no additional arguments besides the app."
+msgstr ""
+
+#: ../../index.rst:601
+msgid "Sent whenever session protection takes effect, and a session is either marked non-fresh or deleted. It receives no additional arguments besides the app."
+msgstr ""
+
