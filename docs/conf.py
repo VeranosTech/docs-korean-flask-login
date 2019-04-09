@@ -230,3 +230,6 @@ intersphinx_mapping = {'https://docs.python.org/3': None,
                        'http://flask.pocoo.org/docs/': None}
 
 auto_content = 'both'
+
+locale_dirs = ["locale/"]
+gettext_compact = False
